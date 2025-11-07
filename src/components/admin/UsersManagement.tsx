@@ -60,6 +60,7 @@ export default function UsersManagement() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'inactive'>('all');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalUsers, setTotalUsers] = useState(0);
@@ -92,7 +93,7 @@ export default function UsersManagement() {
 
   useEffect(() => {
     loadUsers();
-  }, [currentPage, searchTerm]);
+  }, [currentPage, searchTerm, statusFilter]);
 
   // Cerrar menú de acciones al hacer clic fuera (evitar cierre inmediato y permitir toggle)
   useEffect(() => {
@@ -126,7 +127,7 @@ export default function UsersManagement() {
       );
       
       // Map the response to our User interface
-      const mappedUsers = response.users.map((user: any) => ({
+      let mappedUsers = response.users.map((user: any) => ({
         ...user,
         isActive: user.isActive ?? true,
         lastLoginAt: user.lastLoginAt ? new Date(user.lastLoginAt).toISOString() : null,
@@ -136,6 +137,15 @@ export default function UsersManagement() {
         createdAt: user.createdAt ? new Date(user.createdAt).toISOString() : new Date().toISOString(),
         updatedAt: user.updatedAt ? new Date(user.updatedAt).toISOString() : new Date().toISOString()
       }));
+      
+      // Filtrar por estado
+      if (statusFilter !== 'all') {
+        mappedUsers = mappedUsers.filter((user: User) => {
+          const roleForcesActive = user.role === 'admin' || user.role === 'superadmin';
+          const isActive = roleForcesActive || (user.planEndDate ? new Date(user.planEndDate) > new Date() : false);
+          return statusFilter === 'active' ? isActive : !isActive;
+        });
+      }
       
       setUsers(mappedUsers);
       setTotalPages(response.totalPages);
@@ -450,16 +460,50 @@ export default function UsersManagement() {
         </div>
       </div>
 
-      {/* Search */}
-      <div className="relative max-w-md">
-        <MdSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-        <input
-          type="text"
-          placeholder="Buscar por nombre o email..."
-          value={searchTerm}
-          onChange={handleSearch}
-          className="w-full pl-10 pr-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-colors duración-200"
-        />
+      {/* Search and Filters */}
+      <div className="flex flex-col md:flex-row gap-4">
+        <div className="relative flex-1 max-w-md">
+          <MdSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+          <input
+            type="text"
+            placeholder="Buscar por nombre o email..."
+            value={searchTerm}
+            onChange={handleSearch}
+            className="w-full pl-10 pr-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-colors duration-200"
+          />
+        </div>
+        <div className="flex gap-2">
+          <button
+            onClick={() => { setStatusFilter('all'); setCurrentPage(1); }}
+            className={`px-4 py-3 rounded-lg font-medium transition-colors duration-200 ${
+              statusFilter === 'all'
+                ? 'bg-purple-500 text-white'
+                : 'bg-gray-800/50 text-gray-400 hover:bg-gray-700 border border-gray-700'
+            }`}
+          >
+            Todos ({totalUsers})
+          </button>
+          <button
+            onClick={() => { setStatusFilter('active'); setCurrentPage(1); }}
+            className={`px-4 py-3 rounded-lg font-medium transition-colors duration-200 ${
+              statusFilter === 'active'
+                ? 'bg-green-500 text-white'
+                : 'bg-gray-800/50 text-gray-400 hover:bg-gray-700 border border-gray-700'
+            }`}
+          >
+            Activos
+          </button>
+          <button
+            onClick={() => { setStatusFilter('inactive'); setCurrentPage(1); }}
+            className={`px-4 py-3 rounded-lg font-medium transition-colors duration-200 ${
+              statusFilter === 'inactive'
+                ? 'bg-red-500 text-white'
+                : 'bg-gray-800/50 text-gray-400 hover:bg-gray-700 border border-gray-700'
+            }`}
+          >
+            Inactivos
+          </button>
+        </div>
       </div>
 
       {/* Error Message */}
@@ -622,6 +666,58 @@ export default function UsersManagement() {
           </div>
         )}
       </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-between bg-gray-800/20 backdrop-blur-sm border border-gray-700 rounded-xl px-6 py-4">
+          <div className="text-sm text-gray-400">
+            Mostrando página {currentPage} de {totalPages}
+          </div>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+              disabled={currentPage === 1}
+              className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              Anterior
+            </button>
+            <div className="flex gap-1">
+              {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                let pageNum;
+                if (totalPages <= 5) {
+                  pageNum = i + 1;
+                } else if (currentPage <= 3) {
+                  pageNum = i + 1;
+                } else if (currentPage >= totalPages - 2) {
+                  pageNum = totalPages - 4 + i;
+                } else {
+                  pageNum = currentPage - 2 + i;
+                }
+                return (
+                  <button
+                    key={pageNum}
+                    onClick={() => setCurrentPage(pageNum)}
+                    className={`px-3 py-2 rounded-lg transition-colors ${
+                      currentPage === pageNum
+                        ? 'bg-purple-500 text-white'
+                        : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                    }`}
+                  >
+                    {pageNum}
+                  </button>
+                );
+              })}
+            </div>
+            <button
+              onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+              disabled={currentPage === totalPages}
+              className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              Siguiente
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Plan Management Modal */}
       {showPlanModal && selectedUser && (
