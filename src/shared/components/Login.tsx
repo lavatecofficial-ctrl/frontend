@@ -352,8 +352,14 @@ export default function Login({ onLogin }: LoginProps) {
       setIsLoading(true);
       setError('');
       
-      // NextAuth manejará la redirección automáticamente a /auth/callback
-      await signIn('google');
+      // Usar Google OAuth directamente
+      const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '1057534929856-5gvnhvdqmvgqmvgqmvgqmvgqmvgqmvgq.apps.googleusercontent.com';
+      const redirectUri = `${window.location.origin}/auth/callback`;
+      const scope = 'email profile';
+      
+      const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=token&scope=${encodeURIComponent(scope)}`;
+      
+      window.location.href = googleAuthUrl;
       
     } catch (error) {
       console.error('Error en login con Google:', error);

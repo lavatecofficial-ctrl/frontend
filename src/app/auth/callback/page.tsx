@@ -1,63 +1,90 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import CircularLoader from '@/components/CircularLoader';
+import { authService } from '@/services/authService';
 
 export default function AuthCallback() {
-  const { data: session, status } = useSession();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    const handleCallback = async () => {
-      if (status === 'loading') return;
-
+    const handleGoogleCallback = async () => {
       try {
-        if (session && (session as any).userData) {
-          const userData = (session as any).userData;
-          const backendToken = (session as any).backendToken;
+        // Obtener el token de Google del hash de la URL
+        const hash = window.location.hash.substring(1);
+        const params = new URLSearchParams(hash);
+        const accessToken = params.get('access_token');
+
+        if (!accessToken) {
+          throw new Error('No se recibió token de Google');
+        }
+
+        // Obtener información del usuario de Google
+        const userInfoResponse = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        if (!userInfoResponse.ok) {
+          throw new Error('Error al obtener información del usuario');
+        }
+
+        const googleUser = await userInfoResponse.json();
+
+        // Hacer login social en el backend
+        const response = await authService.socialLogin({
+          provider: 'google',
+          email: googleUser.email,
+          name: googleUser.name,
+          picture: googleUser.picture,
+          providerId: googleUser.id,
+        });
+
+        // Guardar token
+        localStorage.setItem('authToken', response.token);
+
+        // Redirigir según el rol
+        const userData = response.user;
+        if (userData.role === 'admin' || userData.role === 'superadmin') {
+          router.push('/dashboard');
+        } else {
+          const now = new Date();
+          const hasActivePlan = userData.planStartDate && userData.planEndDate &&
+            new Date(userData.planStartDate) <= now && 
+            new Date(userData.planEndDate) >= now;
           
-          // Guardar el token en localStorage para nuestro sistema
-          localStorage.setItem('authToken', backendToken);
-          
-          // Verificar el rol y estado del plan del usuario y redirigir apropiadamente
-          if (userData.role === 'admin' || userData.role === 'superadmin') {
-            // Admins y superadmins van directo al dashboard
+          if (hasActivePlan) {
             router.push('/dashboard');
           } else {
-            // Verificar si el usuario tiene un plan activo
-            const now = new Date();
-            const hasActivePlan = userData.planStartDate && userData.planEndDate &&
-              new Date(userData.planStartDate) <= now && 
-              new Date(userData.planEndDate) >= now;
-            
-            if (hasActivePlan) {
-              // Usuarios con plan activo van al dashboard
-              router.push('/dashboard');
-            } else {
-              // Usuarios sin plan activo van a no-plan
-              router.push('/no-plan');
-            }
+            router.push('/no-plan');
           }
-        } else if (status === 'unauthenticated') {
-          // Si no hay sesión, redirigir al login
-          router.push('/login');
         }
       } catch (error) {
-        console.error('Error en callback:', error);
-        router.push('/login');
+        console.error('Error en callback de Google:', error);
+        setError('Error al procesar el login con Google');
+        setTimeout(() => router.push('/login'), 2000);
       } finally {
         setLoading(false);
       }
     };
 
-    handleCallback();
-  }, [session, status, router]);
+    handleGoogleCallback();
+  }, [router]);
 
-  if (loading || status === 'loading') {
+  if (loading) {
     return <CircularLoader />;
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-red-500">{error}</div>
+      </div>
+    );
   }
 
   return null;
