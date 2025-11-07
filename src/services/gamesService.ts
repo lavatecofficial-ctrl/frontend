@@ -14,7 +14,7 @@ export interface Game {
 }
 
 class GamesService {
-  private baseURL = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api`;
+  private baseURL = `${process.env.NEXT_PUBLIC_API_URL || 'https://grupoaviatorcolombia.app'}/api`;
 
   async getGames(): Promise<Game[]> {
     try {

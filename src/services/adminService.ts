@@ -51,7 +51,7 @@ interface UpdateUserRoleRequest {
   role: 'user' | 'admin' | 'superadmin';
 }
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://grupoaviatorcolombia.app';
 
 class AdminService {
   private getAuthHeaders() {

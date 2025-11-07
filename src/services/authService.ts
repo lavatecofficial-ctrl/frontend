@@ -42,7 +42,7 @@ class AuthService {
 
   constructor() {
     // Usar variable de entorno para la URL del backend
-    this.baseURL = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api`;
+    this.baseURL = `${process.env.NEXT_PUBLIC_API_URL || 'https://grupoaviatorcolombia.app'}/api`;
   }
 
   async register(credentials: RegisterCredentials): Promise<AuthResponse> {

@@ -12,7 +12,7 @@ export interface Bookmaker {
   game?: Game;
 }
 
-const API_BASE_URL = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api`;
+const API_BASE_URL = `${process.env.NEXT_PUBLIC_API_URL || 'https://grupoaviatorcolombia.app'}/api`;
 
 export class BookmakersService {
   static async getBookmakers(): Promise<Bookmaker[]> {

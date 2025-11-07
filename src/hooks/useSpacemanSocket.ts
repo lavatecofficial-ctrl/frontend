@@ -95,7 +95,7 @@ const useSpacemanSocket = (bookmakerId: number) => {
     console.log('🎯 Bookmaker ID:', bookmakerId);
 
     // URL del WebSocket específico para Spaceman
-    const wsUrl = process.env.NEXT_PUBLIC_WS_URL || 'http://localhost:3001';
+    const wsUrl = process.env.NEXT_PUBLIC_WS_URL || 'https://grupoaviatorcolombia.app';
     const newSocket = io(`${wsUrl}/spaceman`, {
       transports: ['websocket', 'polling'],
       auth: {
