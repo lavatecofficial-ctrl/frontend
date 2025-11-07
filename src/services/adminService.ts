@@ -167,6 +167,25 @@ class AdminService {
       throw error;
     }
   }
+
+  async startServices(): Promise<{ message: string; timestamp: string; results: any }> {
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/services/start-all`, {
+        method: 'POST',
+        headers: this.getAuthHeaders(),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Error al iniciar servicios');
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Error en startServices:', error);
+      throw error;
+    }
+  }
 }
 
 export const adminService = new AdminService();
