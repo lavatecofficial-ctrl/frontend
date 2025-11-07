@@ -353,7 +353,7 @@ export default function Login({ onLogin }: LoginProps) {
       setError('');
       
       // Usar Google OAuth directamente
-      const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '1057534929856-5gvnhvdqmvgqmvgqmvgqmvgqmvgqmvgq.apps.googleusercontent.com';
+      const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '481959811670-9hjg6l6ilia6n28fcoroupiic0egii9v.apps.googleusercontent.com';
       const redirectUri = `${window.location.origin}/auth/callback`;
       const scope = 'email profile';
       
