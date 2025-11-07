@@ -1,0 +1,446 @@
+/* Dashboard Styles - Exactamente como V2 */
+
+/* Container Principal */
+.dashboard {
+  min-height: 100vh;
+  background: none !important;
+}
+
+/* Content Area */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 4rem 2rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Header - Título y Subtítulo */
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+  animation: fadeInLeft 0.6s ease-out;
+}
+
+.title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  background: linear-gradient(180deg, #c0c0c0 0%, #0a0a0a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.75rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+  background: linear-gradient(180deg, #9ca3af 0%, #4b5563 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 500;
+}
+
+/* Grid de Tarjetas */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 240px));
+  gap: 2rem;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0;
+  z-index: 1;
+  background: none;
+  justify-content: center;
+}
+
+/* Mobile: 1 columna */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    max-width: 100%;
+  }
+}
+
+/* Card Wrapper para animación */
+.cardWrapper {
+  opacity: 0;
+}
+
+/* Tarjetas */
+.card {
+  position: relative;
+  height: 220px;
+  width: 240px;
+  border: none;
+  border-radius: 24px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.card:hover {
+  /* transform: translateY(-8px) scale(1.02); */
+}
+
+.card:active {
+  /* transform: translateY(-4px) scale(0.98); */
+}
+
+/* Logo Container */
+.cardLogoContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+/* Logo Container para Bookmakers - Posición izquierda */
+.bookmakerCard .cardLogoContainer {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  height: auto;
+  justify-content: flex-start;
+}
+
+.cardLogo {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover .cardLogo {
+  /* transform: scale(1.05); */
+  /* filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.6)); */
+}
+
+/* Bookmaker Card Styles - Horizontal y Compacto */
+.bookmakerCard {
+  width: 100% !important;
+  max-width: 590px;
+  height: 77px !important;
+  aspect-ratio: auto;
+  animation: bookmakerFadeIn 500ms ease-out both !important;
+  will-change: opacity, transform;
+  padding: 0.75rem 1rem !important;
+}
+
+@keyframes bookmakerFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Grid específico para bookmakers: disposición vertical compacta */
+.content:has(.bookmakerCard) .grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 590px;
+}
+
+.cardActive {
+  opacity: 1;
+}
+
+.cardInactive {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cardInactive:hover {
+  transform: none;
+}
+
+.cardLogoInactive {
+  filter: grayscale(100%) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+}
+
+.cardLogoLarge {
+  max-width: 100% !important;
+}
+
+/* Bookmaker Header */
+.bookmakerHeader {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.backButtonContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.backButton {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.backButton:hover {
+  background: rgba(30, 30, 30, 0.7);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: scale(1.1);
+}
+
+.backIcon {
+  font-size: 24px;
+}
+
+.gameLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gameLogoImage {
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+}
+
+.bookmakerSubtitle {
+  font-size: 1rem;
+  background: linear-gradient(180deg, #9ca3af 0%, #4b5563 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Logos para bookmakers horizontales */
+.bookmakerCard .cardLogo {
+  height: 50px;
+  max-width: 157px;
+  transition: none;
+  transform: none;
+  filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.5));
+}
+
+.bookmakerCard .cardLogo.cardLogoLarge {
+  height: 65px !important;
+  max-width: 205px !important;
+  min-height: 65px !important;
+}
+
+/* Bookmaker Arrow - Posición derecha centrada verticalmente */
+.bookmakerArrowContainer {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 20;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.cardActive:hover .bookmakerArrowContainer {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-50%);
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.4),
+    inset 0 2px 4px rgba(255, 255, 255, 0.15),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.bookmakerArrowIcon {
+  font-size: 1.43rem;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Offline Banner */
+.offlineBanner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  background: rgba(239, 68, 68, 0.9);
+  color: white;
+  padding: 0.5rem 2rem;
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 2px;
+  z-index: 30;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* Loading States */
+.loadingContainer,
+.errorContainer,
+.emptyContainer {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #00ff88;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.errorText,
+.emptyText {
+  color: #9ca3af;
+  font-size: 1.125rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Animations */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.5rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+  }
+  
+  .header {
+    margin-bottom: 2rem;
+  }
+
+  .card {
+    height: 140px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 0.75rem;
+  }
+
+  .cardLogo {
+    max-width: 50%;
+    max-height: 50%;
+  }
+
+  .content {
+    padding: 3rem 1rem 1rem;
+  }
+
+  /* Bookmaker Cards en Mobile */
+  .bookmakerCard {
+    max-width: 100%;
+    height: 60px !important;
+    padding: 0.6rem 0.75rem !important;
+  }
+
+  .bookmakerCard .cardLogo {
+    height: 39px;
+    max-width: 123px;
+  }
+
+  .bookmakerCard .cardLogoContainer {
+    left: 0.6rem;
+  }
+
+  .bookmakerArrowContainer {
+    width: 42px;
+    height: 42px;
+    right: 0.6rem;
+  }
+
+  .bookmakerArrowIcon {
+    font-size: 1.3rem;
+  }
+
+  .content:has(.bookmakerCard) .grid {
+    gap: 10px;
+    padding: 0 1rem;
+  }
+}

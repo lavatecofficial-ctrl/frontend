@@ -1,0 +1,258 @@
+/* Portal de Ruletas - Estilos Básicos */
+
+.roulettes-container {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Estilos consistentes para el header del portal de ruletas */
+.roulettes-container > div:first-child {
+  border-radius: 20px !important;
+}
+
+/* Desktop padding para header */
+@media (min-width: 769px) {
+  .roulettes-container > div:first-child {
+    padding: 12px 24px !important;
+  }
+}
+
+/* Animación de entrada para el portal de ruletas */
+@keyframes roulettesFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.roulettes-container {
+  animation: roulettesFadeIn 0.8s ease-out forwards;
+}
+
+/* Estilos móviles para el Portal de Ruletas */
+@media (max-width: 768px) {
+  .roulettes-container {
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: auto auto auto auto auto auto auto !important;
+    overflow-y: auto !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    gap: 4px !important;
+  }
+
+  /* Header - Ocupa toda la fila en móvil */
+  .roulettes-container > div:first-child {
+    grid-column: 1 / -1 !important;
+    grid-row: 1 !important;
+    padding: 12px 16px !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* Subheader - Ocupa toda la fila en móvil */
+  .roulettes-container > div:nth-child(2) {
+    grid-area: 2 / 1 / auto / -1 !important;
+    margin-top: 0 !important;
+    padding: 8px 20px !important;
+  }
+
+  /* Historial - Ocupa toda la fila en móvil */
+  .roulettes-container > div:nth-child(3) {
+    grid-column: 1 / -1 !important;
+    grid-row: 3 !important;
+    max-height: 200px !important;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+
+  /* Tabla de estadísticas - Ocupa toda la fila en móvil */
+  .roulettes-container > div:nth-child(4) {
+    grid-column: 1 / -1 !important;
+    grid-row: 4 !important;
+  }
+
+  /* Spinner y Tarjeta 6 - Van una al lado de la otra en móvil (fila 5) */
+  .roulettes-container > div:nth-child(7) {
+    grid-column: 1 / 2 !important;
+    grid-row: 5 !important;
+    min-height: 200px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* Tarjeta 6 - Va al lado del Spinner en móvil (fila 5) */
+  .roulettes-container > div:nth-child(8) {
+    grid-column: 2 / 3 !important;
+    grid-row: 5 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* Tarjetas de porcentajes - Van una al lado de la otra en móvil (fila 6) */
+  .roulettes-container > div:nth-child(5) {
+    grid-column: 1 / 2 !important;
+    grid-row: 6 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .roulettes-container > div:nth-child(6) {
+    grid-column: 2 / 3 !important;
+    grid-row: 6 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* Tarjetas de docenas y columnas - Van una al lado de la otra en móvil (fila 7) */
+  .roulettes-container > div:nth-child(9) {
+    grid-column: 1 / 2 !important;
+    grid-row: 7 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .roulettes-container > div:nth-child(10) {
+    grid-column: 2 / 3 !important;
+    grid-row: 7 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* Ajustes específicos para elementos internos en móvil */
+  .roulettes-container .text-xl {
+    font-size: 1.125rem !important;
+  }
+
+  .roulettes-container .text-lg {
+    font-size: 1rem !important;
+  }
+
+  .roulettes-container .text-sm {
+    font-size: 0.875rem !important;
+  }
+
+  .roulettes-container .text-xs {
+    font-size: 0.75rem !important;
+  }
+
+  /* Ajustar padding en móvil */
+  .roulettes-container .p-4 {
+    padding: 12px !important;
+  }
+
+  .roulettes-container .p-2 {
+    padding: 8px !important;
+  }
+
+  .roulettes-container .px-6 {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* Ajustar grid interno de la tabla en móvil */
+  .roulettes-container .grid-cols-4 {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 4px !important;
+  }
+
+  /* Ajustar grid del historial en móvil */
+  .roulettes-container .grid-cols-12 {
+    grid-template-columns: repeat(6, 1fr) !important;
+    gap: 2px !important;
+  }
+
+  /* Asegurar que todas las tarjetas tengan el mismo ancho */
+  .roulettes-container > div {
+    box-sizing: border-box !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Forzar ancho uniforme en todas las tarjetas */
+  .roulettes-container > div[class*="col-span"] {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+
+  /* Ajustar tamaño de los números del historial en móvil */
+  .roulettes-container .w-7 {
+    width: 24px !important;
+  }
+
+  .roulettes-container .h-7 {
+    height: 24px !important;
+  }
+
+  /* Ajustar texto de los números en móvil */
+  .roulettes-container .text-sm {
+    font-size: 0.75rem !important;
+  }
+
+  /* Ajustar tamaño del SPINNER en móvil */
+  .roulettes-container svg#root {
+    max-width: 160px !important;
+    max-height: 160px !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* Ajustar el contenedor del SPINNER en móvil */
+  .roulettes-container > div:nth-child(7) {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 12px !important;
+  }
+
+  /* Ajustar el número central del SPINNER en móvil */
+  .roulettes-container svg#root text {
+    font-size: 2.5rem !important;
+  }
+
+  /* Ajustar gráfico de rangos en móvil para evitar desbordamiento */
+  .roulettes-container canvas {
+    max-width: 100% !important;
+    max-height: 120px !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Ajustar contenedor del gráfico de rangos */
+  .roulettes-container .chartjs-render-monitor {
+    max-width: 100% !important;
+    max-height: 120px !important;
+  }
+
+  /* Forzar que el contenedor del gráfico de rangos no se desborde */
+  .roulettes-container > div:nth-child(6) {
+    overflow: hidden !important;
+    max-width: 100% !important;
+  }
+}
+
+/* Estilos para tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .roulettes-container {
+    grid-template-columns: repeat(6, 1fr) !important;
+    gap: 6px !important;
+    padding: 6px !important;
+  }
+
+  /* En tablet, algunas tarjetas pueden compartir fila */
+  .roulettes-container > div:nth-child(5),
+  .roulettes-container > div:nth-child(6) {
+    grid-column: span 3 !important;
+  }
+
+  .roulettes-container > div:nth-child(7),
+  .roulettes-container > div:nth-child(8) {
+    grid-column: span 3 !important;
+  }
+
+  .roulettes-container > div:nth-child(9),
+  .roulettes-container > div:nth-child(10) {
+    grid-column: span 3 !important;
+  }
+}

@@ -1,0 +1,628 @@
+/* ================================
+   PORTAL CONTAINER - GRID LAYOUT V2
+   ================================ */
+
+.portalContainer {
+  /* Grid Setup */
+  display: grid;
+  grid-template-rows: 50px 1fr;
+  grid-template-columns: 1fr;
+  
+  /* Viewport Full Height */
+  height: 100vh;
+  width: 100vw;
+  
+  /* No Overflow */
+  overflow: hidden;
+  
+  /* Visual - Background ultra oscuro tech */
+  position: relative;
+  background: 
+    radial-gradient(ellipse at 10% 90%, rgba(124, 58, 237, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 10%, rgba(59, 130, 246, 0.08) 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 50%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
+    linear-gradient(180deg, #000000 0%, #0a0a0f 50%, #000000 100%);
+  color: #d1d5db;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Capa de degradado tech con efecto de escaneo */
+.portalContainer::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: 
+    linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.6) 50%, transparent 100%),
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(139, 92, 246, 0.02) 2px, rgba(139, 92, 246, 0.02) 4px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.8;
+}
+
+/* ================================
+   PORTAL CONTENT - SEGUNDA FILA
+   ================================ */
+
+.portalContent {
+  grid-row: 2;
+  grid-column: 1;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  padding: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ================================
+   GRID CONTAINER - LAYOUT DE TARJETAS
+   ================================ */
+
+.gridContainer {
+  display: grid;
+  grid-template-rows: 56px 1.5fr 0.8fr;
+  grid-template-columns: 1fr;
+  gap: 4px;
+  height: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+  outline: none;
+}
+
+/* ================================
+   FILA SUPERIOR - Small Cards
+   ================================ */
+
+.topRow {
+  grid-row: 1;
+  grid-column: 1;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr) 1.5fr;
+  gap: 4px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
+
+/* Tarjetas KPI */
+.kpiCard {
+  background: 
+    linear-gradient(135deg, rgba(8, 12, 20, 0.95) 0%, rgba(3, 7, 15, 0.98) 100%),
+    radial-gradient(circle at bottom left, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+  border-radius: 14px;
+  border: 1px solid rgba(139, 92, 246, 0.18);
+  backdrop-filter: blur(20px) saturate(160%);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(139, 92, 246, 0.12),
+    inset 0 0 15px rgba(0, 0, 0, 0.4);
+  
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 0.5rem 0.75rem;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efectos de luz para cada tarjeta KPI */
+.kpiCard:nth-child(1)::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: radial-gradient(ellipse 100% 80% at top center, 
+    rgba(59, 130, 246, 0.5) 0%, 
+    rgba(59, 130, 246, 0.3) 30%,
+    rgba(59, 130, 246, 0.15) 50%,
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.kpiCard:nth-child(2)::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: radial-gradient(ellipse 100% 80% at top center, 
+    rgba(16, 185, 129, 0.5) 0%, 
+    rgba(16, 185, 129, 0.3) 30%,
+    rgba(16, 185, 129, 0.15) 50%,
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.kpiCard:nth-child(3)::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: radial-gradient(ellipse 100% 80% at top center, 
+    rgba(245, 158, 11, 0.5) 0%, 
+    rgba(245, 158, 11, 0.3) 30%,
+    rgba(245, 158, 11, 0.15) 50%,
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.kpiCard:nth-child(4)::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: radial-gradient(ellipse 100% 80% at top center, 
+    rgba(139, 92, 246, 0.5) 0%, 
+    rgba(139, 92, 246, 0.3) 30%,
+    rgba(139, 92, 246, 0.15) 50%,
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.kpiCard:nth-child(5)::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: radial-gradient(ellipse 100% 80% at top center, 
+    rgba(236, 72, 153, 0.5) 0%, 
+    rgba(236, 72, 153, 0.3) 30%,
+    rgba(236, 72, 153, 0.15) 50%,
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Tarjeta de hora */
+.kpiCardTime {
+  background: 
+    linear-gradient(135deg, rgba(8, 12, 20, 0.95) 0%, rgba(3, 7, 15, 0.98) 100%),
+    radial-gradient(circle at center, rgba(59, 130, 246, 0.1) 0%, transparent 60%);
+  border-radius: 14px;
+  border: 1px solid rgba(59, 130, 246, 0.22);
+  backdrop-filter: blur(20px) saturate(160%);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(59, 130, 246, 0.15),
+    inset 0 0 15px rgba(0, 0, 0, 0.4);
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  height: 100%;
+  box-sizing: border-box;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: 0.5px;
+}
+
+/* ================================
+   FILA MEDIA - Dos columnas
+   ================================ */
+
+.middleRow {
+  grid-row: 2;
+  grid-column: 1;
+  display: grid;
+  grid-template-columns: 2.5fr 1fr;
+  gap: 4px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* ================================
+   FILA INFERIOR - Tres columnas
+   ================================ */
+
+.bottomRow {
+  grid-row: 3;
+  grid-column: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 4px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
+
+/* ================================
+   TARJETAS - Estilo base V2
+   ================================ */
+
+.card {
+  background: 
+    linear-gradient(135deg, rgba(8, 12, 20, 0.98) 0%, rgba(3, 7, 15, 0.99) 100%),
+    radial-gradient(circle at top right, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 20px;
+  backdrop-filter: blur(24px) saturate(180%);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(139, 92, 246, 0.15),
+    inset 0 0 20px rgba(0, 0, 0, 0.5);
+  color: #d1d5db;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+/* ================================
+   COLUMNAS
+   ================================ */
+
+.middleColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  height: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.bottomColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* ================================
+   RESPONSIVE - MOBILE FIRST
+   ================================ */
+
+/* MOBILE - Layout vertical completo */
+@media (max-width: 1024px) {
+  .portalContainer {
+    grid-template-rows: 50px 1fr;
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  
+  .portalContent {
+    padding: 8px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: auto;
+  }
+  
+  .gridContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: auto;
+    min-height: 0;
+  }
+  
+  /* KPIs - 2x3 grid */
+  .topRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 6px;
+    height: auto;
+  }
+  
+  .topRow .kpiCard {
+    min-height: 50px !important;
+    padding: 0.25rem 0.35rem !important;
+    gap: 0.05rem !important;
+  }
+  
+  .topRow .kpiCard h3 {
+    font-size: 0.55rem !important;
+    margin: 0 !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.2px !important;
+  }
+  
+  .topRow .kpiCard p {
+    font-size: 0.75rem !important;
+    margin: 0 !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+  }
+  
+  .topRow .kpiCard span {
+    font-size: 0.5rem !important;
+    opacity: 0.9 !important;
+  }
+  
+  .kpiCardTime {
+    grid-column: 1 / -1;
+    min-height: 45px;
+    font-size: 1.1rem;
+    padding: 0.4rem 0.75rem;
+  }
+  
+  /* Middle Row - Stack vertical */
+  .middleRow {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: auto;
+  }
+  
+  /* Desktop: Mostrar BetsBlock, ocultar tarjetas móviles */
+  .betsBlockDesktop {
+    display: none;
+  }
+  
+  /* Mobile: Tarjetas separadas lado a lado */
+  .predictionCardMobile,
+  .multiplierCardMobile {
+    display: block;
+    min-height: 160px;
+  }
+  
+  /* Orden correcto: Predicción y Multiplicador arriba, Gráfico abajo */
+  .predictionCardMobile {
+    order: 1;
+  }
+  
+  .multiplierCardMobile {
+    order: 2;
+  }
+  
+  /* Gráfico va al final (abajo de las dos tarjetas) */
+  .middleRow > .card:nth-child(1) {
+    order: 3;
+    grid-column: 1 / -1;
+    min-height: 400px;
+    padding: 0 !important;
+  }
+  
+  /* Hacer que las dos tarjetas móviles estén lado a lado */
+  .middleRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  
+  /* Bottom Row - Stack vertical */
+  .bottomRow {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: auto;
+  }
+  
+  .bottomRow > .card {
+    min-height: 200px;
+    max-height: 250px;
+  }
+  
+  /* Contenido compacto para las tarjetas del bottom */
+  .bottomRow > .card h2,
+  .bottomRow > .card h3 {
+    font-size: 0.9rem;
+    margin: 4px 0;
+  }
+  
+  .bottomRow > .card {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+  
+  .bottomRow > .card canvas {
+    max-height: 150px;
+  }
+  
+  .bottomRow > .card table {
+    font-size: 0.7rem;
+  }
+  
+  .bottomRow > .card td,
+  .bottomRow > .card th {
+    padding: 4px;
+  }
+  
+  /* Ajustes de tarjetas generales */
+  .card {
+    border-radius: 16px;
+    padding: 12px;
+  }
+  
+  /* Tarjetas móviles sin padding interno */
+  .predictionCardMobile,
+  .multiplierCardMobile {
+    padding: 0;
+    font-size: 0.6rem;
+    overflow: hidden;
+  }
+  
+  /* Contenido compacto dentro de predicción */
+  .predictionCardMobile h2,
+  .predictionCardMobile h3,
+  .predictionCardMobile h4 {
+    font-size: 0.65rem;
+    margin: 1px 0;
+    line-height: 1.1;
+    padding: 2px 4px;
+  }
+  
+  .predictionCardMobile p,
+  .predictionCardMobile span,
+  .predictionCardMobile div {
+    font-size: 0.6rem;
+    margin: 0;
+    line-height: 1.2;
+    padding: 1px 4px;
+  }
+  
+  /* Contenido compacto dentro de multiplicador */
+  .multiplierCardMobile h2,
+  .multiplierCardMobile h3 {
+    font-size: 0.7rem;
+    margin: 1px 0;
+    padding: 2px 4px;
+  }
+  
+  .multiplierCardMobile p,
+  .multiplierCardMobile span {
+    font-size: 0.6rem;
+    margin: 0;
+    padding: 1px 4px;
+  }
+  
+  /* Multiplicador en vivo más grande pero compacto */
+  .multiplierCardMobile div[style*="font-size"] {
+    font-size: 1.8rem !important;
+  }
+  
+  /* Imágenes más pequeñas en LiveMultiplier */
+  .multiplierCardMobile img {
+    max-width: 50px !important;
+    max-height: 40px !important;
+    width: auto !important;
+    height: auto !important;
+  }
+  
+  .multiplierCardMobile .partners-logo-mobile {
+    max-width: 45px !important;
+    max-height: 35px !important;
+  }
+  
+  /* También aplicar en desktop */
+  .predictionCardMobile img,
+  .multiplierCardMobile img {
+    max-width: 50px !important;
+    max-height: 40px !important;
+  }
+  
+  /* BetsBlock contenido compacto */
+  .middleRow > .card:nth-child(2) {
+    font-size: 0.75rem;
+  }
+  
+  .middleRow > .card:nth-child(2) h2,
+  .middleRow > .card:nth-child(2) h3 {
+    font-size: 0.9rem;
+    margin: 4px 0;
+  }
+  
+  .middleRow > .card:nth-child(2) button {
+    padding: 4px 8px;
+    font-size: 0.7rem;
+    min-height: 28px;
+  }
+  
+  .middleRow > .card:nth-child(2) div {
+    padding: 4px;
+  }
+  
+  .middleRow > .card:nth-child(2) canvas {
+    max-height: 80px;
+  }
+}
+
+/* DESKTOP - Solo para pantallas grandes */
+@media (min-width: 1025px) {
+  /* Ocultar BetsBlock completo, mostrar tarjetas separadas */
+  .betsBlockDesktop {
+    display: none;
+  }
+  
+  .predictionCardMobile,
+  .multiplierCardMobile {
+    display: block;
+    min-height: auto;
+    padding: 0;
+  }
+  
+  /* Restaurar layout desktop - 2 columnas con filas iguales */
+  .middleRow {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 4px;
+  }
+  
+  /* Gráfico ocupa toda la columna izquierda */
+  .middleRow > .card:not(.betsBlockDesktop):not(.predictionCardMobile):not(.multiplierCardMobile) {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    order: 0;
+    padding: 12px;
+    overflow: hidden;
+  }
+  
+  /* Predicción arriba derecha - altura fija */
+  .predictionCardMobile {
+    grid-column: 2;
+    grid-row: 1;
+    order: 1;
+    overflow: hidden;
+    height: 100%;
+  }
+  
+  /* Multiplicador abajo derecha - altura fija */
+  .multiplierCardMobile {
+    grid-column: 2;
+    grid-row: 2;
+    order: 2;
+    overflow: hidden;
+    height: 100%;
+  }
+  
+  /* Logos tamaño medio en desktop */
+  .multiplierCardMobile img {
+    max-width: 90px !important;
+    max-height: 70px !important;
+    width: auto !important;
+    height: auto !important;
+  }
+  
+  .multiplierCardMobile .partners-logo-mobile {
+    max-width: 80px !important;
+    max-height: 60px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .card:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 3px;
+  }
+}

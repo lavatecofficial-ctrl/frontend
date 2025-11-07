@@ -1,0 +1,257 @@
+/* Dashboard Animations */
+
+/* Animación de entrada suave para bookmakers */
+@keyframes fadeInUpStaggered {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animación de salida suave */
+@keyframes fadeOutDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+/* Animación de entrada para el título */
+@keyframes fadeInLeftSmooth {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Animación de entrada desde abajo */
+@keyframes fadeInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Clases para las animaciones del dashboard */
+.dashboard-fade-in-up {
+  animation: fadeInUpStaggered 0.8s ease-out forwards;
+}
+
+.dashboard-fade-out-down {
+  animation: fadeOutDown 0.6s ease-in forwards;
+}
+
+.dashboard-fade-in-left {
+  animation: fadeInLeftSmooth 1s ease-out forwards;
+}
+
+.dashboard-fade-in-bottom {
+  animation: fadeInBottom 0.6s ease-out forwards;
+}
+
+/* Animación escalonada deshabilitada para las tarjetas de bookmakers */
+.bookmaker-card {
+  opacity: 1;
+  transform: none;
+}
+
+/* Animación escalonada deshabilitada para las tarjetas de juegos */
+.game-card {
+  opacity: 1;
+  transform: none;
+}
+
+/* Efecto de hover deshabilitado para las tarjetas */
+.card-hover-effect {
+  transition: none;
+}
+
+/* Mejorar touch targets en móviles */
+@media (max-width: 768px) {
+  .card-hover-effect {
+    min-height: 120px;
+  }
+}
+
+/* Estilos específicos para ruletas - SOLUCIÓN AGRESIVA */
+.roulette-card {
+  /* Las ruletas ocupan todo el espacio disponible */
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+}
+
+/* SOLUCIÓN AGRESIVA: Forzar que TODAS las imágenes en ruletas ocupen 100% */
+.roulette-card img,
+.roulette-card .bookmaker-logo,
+.roulette-card Image,
+.roulette-card [data-nimg] {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border-radius: 20px !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  max-width: none !important;
+  max-height: none !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+}
+
+.roulette-card .glow-effect {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 20px;
+}
+
+/* Animación para el botón de regreso */
+.back-button-animation {
+  transition: all 0.3s ease;
+}
+
+.back-button-animation:hover {
+  transform: translateX(-5px);
+}
+
+/* Responsive back button */
+@media (max-width: 768px) {
+  .back-button-animation:hover {
+    transform: translateX(-3px);
+  }
+}
+
+/* Animación de carga mejorada */
+.loading-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Mejoras responsive para el layout */
+@media (max-width: 640px) {
+  /* Ajustar espaciado en móviles */
+  .dashboard-fade-in-up {
+    animation-duration: 0.6s;
+  }
+  
+  /* Animation delays removidos */
+}
+
+/* Optimizaciones para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .card-hover-effect {
+    min-height: 100px;
+  }
+  
+  /* Ajustar bordes redondeados en móviles */
+  .bookmaker-card,
+  .game-card {
+    border-radius: 16px !important;
+  }
+}
+
+/* Asegurar que el Dashboard ocupe toda la altura de la pantalla */
+.dashboard-container {
+  min-height: 100vh !important;
+  height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.dashboard-main {
+  flex: 1 !important;
+  min-height: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+}
+
+/* Asegurar que el background gradient ocupe toda la altura */
+.dashboard-background {
+  min-height: 100vh !important;
+  height: 100vh !important;
+  position: relative !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Asegurar que el pseudo-elemento before no cause scroll */
+.dashboard-background::before {
+  max-width: 100vw !important;
+  box-sizing: border-box !important;
+}
+
+/* Permitir scroll en móviles */
+@media (max-width: 768px) {
+  .dashboard-background {
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow: visible !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+  }
+  
+  .dashboard-main {
+    align-items: flex-start !important;
+    padding-top: 80px !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+  
+  /* Hacer las tarjetas más pequeñas en móviles */
+  .bookmaker-card,
+  .game-card {
+    max-width: 100% !important;
+    max-height: 160px !important;
+    aspect-ratio: 16/9 !important;
+    width: 100% !important;
+  }
+  
+  /* Ajustar el grid para móviles - Solo para el dashboard */
+  .dashboard-background .grid {
+    gap: 12px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  /* Reducir el tamaño máximo del contenedor - Solo para el dashboard */
+  .dashboard-background .max-w-4xl {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  
+  /* Forzar una sola columna en móviles - Solo para el dashboard */
+  .dashboard-background .grid-cols-1,
+  .dashboard-background .grid-cols-2,
+  .dashboard-background .grid-cols-3 {
+    grid-template-columns: 1fr !important;
+  }
+}

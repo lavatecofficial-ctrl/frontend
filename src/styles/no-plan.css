@@ -1,0 +1,179 @@
+/* Estilos para la página No Plan */
+
+/* Background base similar al dashboard */
+.no-plan-background {
+  min-height: 100vh !important;
+  height: 100vh !important;
+  position: relative !important;
+  overflow: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Asegurar que el pseudo-elemento before no cause scroll */
+.no-plan-background::before {
+  max-width: 100vw !important;
+  box-sizing: border-box !important;
+}
+
+/* Animaciones específicas para no-plan */
+@keyframes no-plan-fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes no-plan-fade-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.no-plan-fade-in-up {
+  animation: no-plan-fade-in-up 0.8s ease-out forwards;
+}
+
+.no-plan-fade-in-left {
+  animation: no-plan-fade-in-left 0.6s ease-out forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
+/* Efectos hover para las tarjetas */
+.no-plan-background .bg-gradient-to-br {
+  transition: all 0.3s ease;
+}
+
+.no-plan-background .bg-gradient-to-br:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .no-plan-background {
+    min-height: 100vh !important;
+    overflow: visible !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+  }
+  
+  .no-plan-background .max-w-2xl {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 16px;
+  }
+  
+  /* Ajustar tamaños de texto en móviles */
+  .no-plan-background h1 {
+    font-size: 2.5rem !important;
+  }
+  
+  .no-plan-background .text-xl {
+    font-size: 1.125rem !important;
+  }
+  
+  /* Ajustar padding en móviles */
+  .no-plan-background .p-8 {
+    padding: 1.5rem !important;
+  }
+  
+  .no-plan-background .px-8 {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+}
+
+/* Optimizaciones para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .no-plan-background h1 {
+    font-size: 2rem !important;
+  }
+  
+  .no-plan-background .w-24 {
+    width: 4rem !important;
+    height: 4rem !important;
+  }
+  
+  .no-plan-background .w-12 {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+  }
+  
+  /* Hacer los botones más pequeños en móviles */
+  .no-plan-background .px-8 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .no-plan-background .py-4 {
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+  }
+}
+
+/* Animación de entrada suave para el navbar */
+@keyframes animate-fade-in-top {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-top {
+  animation: animate-fade-in-top 0.6s ease-out forwards;
+}
+
+/* Efectos de hover para botones */
+.no-plan-background button {
+  transition: all 0.3s ease;
+}
+
+/* Efecto de pulsación en botones principales */
+.no-plan-background .bg-gradient-to-r:active {
+  transform: scale(0.98);
+}
+
+/* Efecto de glow sutil en el icono principal */
+.no-plan-background .bg-gradient-to-br.from-orange-500 {
+  box-shadow: 0 0 30px rgba(255, 165, 0, 0.3);
+}
+
+/* Mejoras en la accesibilidad */
+.no-plan-background button:focus {
+  outline: 2px solid rgba(255, 165, 0, 0.5);
+  outline-offset: 2px;
+}
+
+/* Animación sutil para las listas */
+.no-plan-background li {
+  transition: all 0.2s ease;
+}
+
+.no-plan-background li:hover {
+  transform: translateX(5px);
+  color: #f3f4f6;
+}
+
+/* Gradiente de texto para el título */
+.no-plan-background h1 {
+  background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 50%, #e5e7eb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

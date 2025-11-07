@@ -1,0 +1,255 @@
+/* Small Cards - Estilos V2 */
+
+.container {
+  display: contents;
+}
+
+.kpiCard {
+  background: 
+    linear-gradient(135deg, rgba(8, 12, 20, 0.95) 0%, rgba(3, 7, 15, 0.98) 100%),
+    radial-gradient(circle at bottom left, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+  border-radius: 14px;
+  border: 1px solid rgba(139, 92, 246, 0.18);
+  backdrop-filter: blur(20px) saturate(160%);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(139, 92, 246, 0.12),
+    inset 0 0 15px rgba(0, 0, 0, 0.4);
+  
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 0.5rem 0.75rem;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+.kpiHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.kpiIcon {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  flex-shrink: 0;
+}
+
+.kpiLabel {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  position: relative;
+  z-index: 2;
+}
+
+.kpiValue {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  white-space: nowrap;
+  position: relative;
+  z-index: 2;
+}
+
+/* Efectos de luz para cada tarjeta */
+.kpiCard:nth-child(1)::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: radial-gradient(ellipse 100% 80% at top center, 
+    rgba(59, 130, 246, 0.5) 0%, 
+    rgba(59, 130, 246, 0.3) 30%,
+    rgba(59, 130, 246, 0.15) 50%,
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.kpiCard:nth-child(2)::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: radial-gradient(ellipse 100% 80% at top center, 
+    rgba(16, 185, 129, 0.5) 0%, 
+    rgba(16, 185, 129, 0.3) 30%,
+    rgba(16, 185, 129, 0.15) 50%,
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.kpiCard:nth-child(3)::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: radial-gradient(ellipse 100% 80% at top center, 
+    rgba(245, 158, 11, 0.5) 0%, 
+    rgba(245, 158, 11, 0.3) 30%,
+    rgba(245, 158, 11, 0.15) 50%,
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.kpiCard:nth-child(4)::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: radial-gradient(ellipse 100% 80% at top center, 
+    rgba(139, 92, 246, 0.5) 0%, 
+    rgba(139, 92, 246, 0.3) 30%,
+    rgba(139, 92, 246, 0.15) 50%,
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.kpiCard:nth-child(5)::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: radial-gradient(ellipse 100% 80% at top center, 
+    rgba(236, 72, 153, 0.5) 0%, 
+    rgba(236, 72, 153, 0.3) 30%,
+    rgba(236, 72, 153, 0.15) 50%,
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Tarjeta de hora - Más ancha */
+.kpiCardTime {
+  background: 
+    linear-gradient(135deg, rgba(8, 12, 20, 0.95) 0%, rgba(3, 7, 15, 0.98) 100%),
+    radial-gradient(circle at center, rgba(59, 130, 246, 0.1) 0%, transparent 60%);
+  border-radius: 14px;
+  border: 1px solid rgba(59, 130, 246, 0.22);
+  backdrop-filter: blur(20px) saturate(160%);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(59, 130, 246, 0.15),
+    inset 0 0 15px rgba(0, 0, 0, 0.4);
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  height: 100%;
+  box-sizing: border-box;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: 0.5px;
+}
+
+/* Colores de iconos */
+.iconBlue {
+  color: rgba(59, 130, 246, 0.9);
+}
+
+.iconGreen {
+  color: rgba(16, 185, 129, 0.9);
+}
+
+.iconYellow {
+  color: rgba(245, 158, 11, 0.9);
+}
+
+.iconPurple {
+  color: rgba(139, 92, 246, 0.9);
+}
+
+.iconPink {
+  color: rgba(236, 72, 153, 0.9);
+}
+
+.iconRed {
+  color: rgba(239, 68, 68, 0.9);
+}
+
+/* Colores de valores */
+.valueBlue {
+  color: rgba(59, 130, 246, 0.95);
+}
+
+.valueGreen {
+  color: rgba(16, 185, 129, 0.95);
+}
+
+.valueYellow {
+  color: rgba(245, 158, 11, 0.95);
+}
+
+.valuePurple {
+  color: rgba(139, 92, 246, 0.95);
+}
+
+.valuePink {
+  color: rgba(236, 72, 153, 0.95);
+}
+
+.valueRed {
+  color: rgba(239, 68, 68, 0.95);
+}
+
+/* MOBILE - Estilos compactos */
+@media (max-width: 1024px) {
+  .kpiCard {
+    min-height: 50px !important;
+    padding: 0.25rem 0.35rem !important;
+    gap: 0.05rem !important;
+  }
+  
+  .kpiIcon {
+    font-size: 0.7rem !important;
+  }
+  
+  .kpiLabel {
+    font-size: 0.55rem !important;
+    letter-spacing: 0.2px !important;
+  }
+  
+  .kpiValue {
+    font-size: 0.75rem !important;
+  }
+  
+  .kpiCardTime {
+    min-height: 45px !important;
+    font-size: 1.1rem !important;
+    padding: 0.4rem 0.75rem !important;
+  }
+}

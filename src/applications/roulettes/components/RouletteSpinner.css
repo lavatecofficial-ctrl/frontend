@@ -1,0 +1,18 @@
+.new-number {
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  0% { 
+    opacity: 0; 
+    filter: blur(2px);
+  }
+  50% {
+    opacity: 0.5;
+    filter: blur(1px);
+  }
+  100% { 
+    opacity: 1; 
+    filter: blur(0px);
+  }
+}

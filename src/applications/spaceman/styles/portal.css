@@ -1,0 +1,754 @@
+/* Spaceman Portal Styles */
+
+.spaceman-portal {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Portal enter animation (fade + scale) */
+.portal-enter {
+  animation: portalFadeScaleIn 0.8s ease-out forwards;
+}
+
+@keyframes portalFadeScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Custom scrollbar */
+.spaceman-portal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.spaceman-portal::-webkit-scrollbar-track {
+  background: rgba(55, 65, 81, 0.3);
+  border-radius: 4px;
+}
+
+.spaceman-portal::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.5);
+  border-radius: 4px;
+}
+
+.spaceman-portal::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.7);
+}
+
+/* Tab animations */
+.tab-button {
+  transition: all 0.2s ease-in-out;
+}
+
+.tab-button:hover {
+  transform: translateY(-1px);
+}
+
+.tab-button.active {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Content transitions */
+.content-fade {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Status indicators */
+.status-indicator {
+  position: relative;
+}
+
+.status-indicator::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -8px;
+  width: 6px;
+  height: 6px;
+  background: currentColor;
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .spaceman-portal .header {
+    padding: 1rem;
+  }
+  
+  .spaceman-portal .nav-tabs {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .spaceman-portal .tab-button {
+    flex: 1;
+    min-width: 120px;
+  }
+}
+
+/* Dark theme enhancements */
+.spaceman-portal {
+  color-scheme: dark;
+}
+
+.spaceman-portal * {
+  box-sizing: border-box;
+}
+
+/* Focus states for accessibility */
+.spaceman-portal button:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 2px;
+}
+
+/* Altura fija configurable para las cards inferiores */
+.spaceman-portal {
+  --bottom-cards-height: 200px; /* ajustable */
+}
+
+/* En móviles, las cards inferiores deben medir 200px */
+@media (max-width: 768px) {
+  .spaceman-portal {
+    --bottom-cards-height: 200px;
+  }
+  .spaceman-portal .cards-container {
+    height: 200px !important;
+    flex-shrink: 0 !important;
+  }
+  .spaceman-portal .cards-container > * {
+    height: 100% !important;
+    min-height: 0 !important;
+  }
+  /* Evitar herencia de Aviator (120px) en RoundInfo y LiveMultiplier */
+  .spaceman-portal.portal-container .round-info,
+  .spaceman-portal.portal-container .live-multiplier {
+    height: 100% !important;
+    min-height: 0 !important;
+  }
+}
+
+/* ===== Estilos del header (medidas como Aviator) ===== */
+/* Fondo/borde específicos de Spaceman para evitar herencias de Aviator */
+.spaceman-portal .header {
+  background: linear-gradient(135deg, #1A0B1A 0%, #2A0B2A 100%) !important;
+  border: 1px solid #4C1D95 !important;
+}
+
+/* Grid de SmallCards: 2 columnas en móvil, 4 en desktop */
+.spaceman-portal .small-cards {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+@media (min-width: 768px) {
+  .spaceman-portal .small-cards {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .spaceman-portal .header {
+    padding: 12px 24px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .spaceman-portal .header {
+    padding: 10px 20px !important;
+    border-radius: 20px !important;
+  }
+}
+
+/* Bloque de apuestas (clase usada en el JSX) - igual a Aviator */
+.spaceman-portal .bets-block {
+  background: linear-gradient(135deg, #0E0E0E 0%, #1A1A1A 100%);
+  border: 1px solid #2A2A2A;
+  border-radius: 20px;
+  padding: 4px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 0; /* crítico para que el grid no crezca por contenido interno */
+  overflow: hidden; /* evitar desbordes que aumenten altura efectiva */
+}
+
+/* Asegurar mismo comportamiento del contenedor inferior que en Aviator */
+.spaceman-portal .cards-container {
+  display: flex !important;
+  flex-direction: row !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  height: var(--bottom-cards-height) !important;
+}
+
+/* Evitar que los hijos de cards-container estiren la altura del 45% */
+.spaceman-portal .cards-container > * {
+  min-height: 0 !important;
+  height: 100% !important;
+}
+
+/* La columna derecha no debe forzar el alto de sus hijos porcentuales */
+.spaceman-portal .game-play {
+  min-height: 0 !important;
+}
+
+/* ===== ESTILOS PARA DESKTOP: igualar altura con Aviator ===== */
+@media (min-width: 769px) {
+  .portal-container {
+    min-height: 100vh !important;
+    height: 100vh !important;
+  }
+}
+
+/* Estilos para el historial de multiplicadores - copiados del estilo de Aviator */
+.stats {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 32px;
+  width: 100%;
+  padding: 4px;
+  border-radius: 16px;
+}
+
+.multipliers-text-grid {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 0 4px;
+  overflow: hidden;
+}
+
+.multiplier-text {
+  display: flex;
+  margin-right: 4px;
+  padding: 2px 4px;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+  text-align: center;
+  font-feature-settings: lining-nums tabular-nums;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -.18px;
+}
+
+/* Estilos para el botón del dropdown */
+.stats .button-block {
+  margin: 0 4px;
+}
+
+.stats .button-block .button {
+  position: relative;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 32px;
+  background: #2A2A2A;
+  z-index: 1;
+  cursor: pointer;
+  box-shadow: -4px 0 10px 10px #000000;
+}
+
+.stats .button-block .button.dropdown-toggle:after {
+  display: none;
+}
+
+.stats .button-block .button .button-icon {
+  width: 16px;
+  height: 16px;
+  background: url(/icons/show-more-icon.svg) no-repeat center center/contain;
+}
+
+.stats.show .button-block .button {
+  z-index: 1001;
+  box-shadow: unset;
+}
+
+.stats.show .button-block .button .button-icon {
+  background: url(/icons/close-icon.svg) no-repeat center center/contain;
+}
+
+/* Estilos para el dropdown de estadísticas */
+.dropdown-menu.show {
+  width: 100%;
+  background-color: transparent;
+  background-color: initial;
+  color: inherit;
+  border: unset;
+  margin: -24px 0 0 4px;
+  padding: 0;
+  overflow: visible;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-8px, 24px);
+  z-index: 1000;
+}
+
+.wrapper {
+  border-radius: 16px;
+  background: #000000;
+  box-shadow: 0 0 4px #141414e0, 0 0 0 2px #2c2d3066;
+  margin: 0 4px;
+  padding: 4px;
+  width: 100%;
+}
+
+.wrapper .wrapper-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 14px;
+  padding: 4px 8px;
+}
+
+.wrapper .wrapper-header .text {
+  color: #a3a3a3;
+  text-align: center;
+  font-feature-settings: lining-nums tabular-nums;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -.18px;
+}
+
+.wrapper .payouts-block {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
+  padding: 2px 4px;
+}
+
+.wrapper .payouts-block .payout {
+  display: inline-block;
+  height: 100%;
+  padding: 2px 4px;
+  margin-right: 4px;
+  margin-top: 4px;
+  cursor: pointer;
+}
+
+.loading {
+  color: #888888;
+  font-size: 0.8rem;
+  text-align: center;
+  padding: 8px;
+}
+
+/* Estilos para el gráfico MultiplierTrend */
+.graphics {
+  background: rgba(17, 24, 39, 0.2);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid #292929;
+  flex-grow: 1;
+  flex-shrink: 1;
+  box-sizing: border-box;
+  height: 100%;
+  position: relative;
+}
+
+.multiplier-trend-wrapper {
+  position: relative;
+}
+
+/* Estilos para el scroll del gráfico */
+.graphics .modern-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.graphics .modern-scroll::-webkit-scrollbar-track {
+  background: rgba(55, 65, 81, 0.3);
+  border-radius: 4px;
+}
+
+.graphics .modern-scroll::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.5);
+  border-radius: 4px;
+}
+
+.graphics .modern-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.7);
+}
+
+/* Estilos para los controles del gráfico */
+.control-toggle {
+  transition: all 0.2s ease-in-out;
+}
+
+.control-toggle:hover {
+  transform: scale(1.05);
+}
+
+/* Estilos para los botones de control */
+.control-button {
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.control-button:hover {
+  opacity: 0.8;
+}
+
+/* Estilos para el estado del servicio */
+.status-indicator {
+  transition: all 0.3s ease-in-out;
+}
+
+.status-indicator.connected {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Estilos para el BetsBlock con gráficos */
+.bets-block-spaceman {
+  background: linear-gradient(135deg, #1A0B1A 0%, #2A0B2A 100%);
+  border-radius: 20px;
+  padding: 4px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Estilos para el navigation-switcher */
+.navigation-switcher {
+  display: flex;
+  width: 100%;
+  height: 32px;
+  background: linear-gradient(135deg, #0E0E0E 0%, #1A1A1A 100%);
+  border-radius: 20px;
+  border: 1px solid #2A2A2A;
+  padding: 2px;
+}
+
+.navigation-switcher .tab {
+  flex-grow: 1;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  background: transparent;
+  border-radius: 18px;
+  border: none;
+  padding: 0;
+  color: #a3a3a3;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -.18px;
+  transition: all .25s ease-in;
+  cursor: pointer;
+}
+
+.navigation-switcher .tab:not(.active):hover {
+  color: #ffffff;
+}
+
+.navigation-switcher .tab.active {
+  background: #2A2A2A;
+  color: #ebebeb;
+  cursor: default;
+}
+
+/* Contenido de los tabs */
+.tab-content {
+  flex: 1;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Estilos para el tab de inicio */
+.inicio-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Estilos para las tarjetas de gráficos en Inicio */
+.finance-chart-card,
+.future-chart-card {
+  background: linear-gradient(135deg, #0E0E0E 0%, #1A1A1A 100%);
+  border-radius: 20px;
+  padding: 12px;
+  margin-bottom: 8px;
+  border: 1px solid #2A2A2A;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.finance-chart,
+.future-chart {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.future-chart-card {
+  margin-bottom: 0;
+}
+
+/* Estilos para el tab de configuración */
+.config-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.config-tab h4 {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.config-sections {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.config-section {
+  margin-bottom: 20px;
+}
+
+.config-options {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.config-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: rgba(42, 42, 42, 0.5);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.config-item-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.config-icon-ema,
+.config-icon-bb,
+.config-icon-sr,
+.config-icon-grid {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+}
+
+.config-icon-ema {
+  background: linear-gradient(135deg, #3B82F6, #60A5FA);
+}
+
+.config-icon-bb {
+  background: linear-gradient(135deg, #8B5CF6, #A78BFA);
+}
+
+.config-icon-sr {
+  background: linear-gradient(135deg, #10B981, #34D399);
+}
+
+.config-icon-grid {
+  background: linear-gradient(135deg, #6B7280, #9CA3AF);
+}
+
+.config-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.config-text label {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.config-text span {
+  color: #a3a3a3;
+  font-size: 12px;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 24px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #4B5563;
+  transition: .4s;
+  border-radius: 24px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+  background-color: #8B5CF6;
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(24px);
+}
+
+/* Estilos para el perfil del usuario */
+.user-profile-section {
+  background: rgba(42, 42, 42, 0.5);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-avatar {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #8B5CF6, #A78BFA);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.user-info h3 {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #a3a3a3;
+  font-size: 14px;
+}
+
+.detail-icon {
+  color: #8B5CF6;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.plan-badge {
+  background: linear-gradient(135deg, #F59E0B, #FBBF24);
+  color: #000000;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .bets-block-spaceman .header {
+    padding: 1rem;
+  }
+  
+  .bets-block-spaceman .nav-tabs {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .bets-block-spaceman .tab-button {
+    flex: 1;
+    min-width: 120px;
+  }
+}
