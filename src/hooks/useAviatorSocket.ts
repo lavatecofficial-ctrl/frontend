@@ -128,6 +128,12 @@ const useAviatorSocket = (bookmakerId: number) => {
 
     // Escuchar datos RAW en tiempo real (sin procesamiento del backend)
     newSocket.on('aviator_raw', (msg) => {
+      // VALIDAR que los datos sean del bookmaker correcto
+      if (msg.bookmakerId !== bookmakerId) {
+        console.warn(`⚠️ Datos recibidos de bookmaker ${msg.bookmakerId}, pero esperaba ${bookmakerId}. Ignorando.`);
+        return;
+      }
+      
       const { data } = msg;
       if (data.p && data.p.c) {
         const command = data.p.c;
